@@ -28,12 +28,6 @@ CSV_FACTION_MAP = {v: k for k, v in FACTION_MAP.items()}
 CSV_RARITY_MAP = {v: k for k, v in RARITY_MAP.items()}
 CSV_SKILL_TYPE_MAP = {v: k for k, v in SKILL_TYPE_MAP.items()}
 
-def format_growth(value, growth):
-    if value is None:
-        return "-"
-    if growth is not None:
-        return f"{value} (+{growth})"
-    return str(value)
 
 def format_value(value, unit=""):
     if value is None:

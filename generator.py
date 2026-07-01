@@ -1,5 +1,5 @@
 import os
-from utils import FACTION_MAP, RARITY_MAP, SKILL_TYPE_MAP, format_growth, format_value
+from utils import FACTION_MAP, RARITY_MAP, SKILL_TYPE_MAP, format_value
 
 def build_header(text, level, output_format):
     match output_format:
@@ -48,12 +48,10 @@ def generate_wiki_table(data, output_format="atwiki", localize="localized"):
     # ステータス情報
     status = data.get("status", {})
     hp_val = status.get("hp")
-    hp_growth = status.get("hp_growth")
-    hp_str = format_growth(hp_val, hp_growth)
+    hp_str = format_value(hp_val)
     
     damage_val = status.get("damage")
-    damage_growth = status.get("damage_growth")
-    damage_str = format_growth(damage_val, damage_growth)
+    damage_str = format_value(damage_val)
     
     speed_val = status.get("speed")
     speed_str = format_value(speed_val)
@@ -179,8 +177,8 @@ def generate_summary_table(units_data, output_format, localize="localized"):
             faction = faction_raw
         
         status = data.get("status", {})
-        hp_str = format_growth(status.get("hp"), status.get("hp_growth"))
-        damage_str = format_growth(status.get("damage"), status.get("damage_growth"))
+        hp_str = format_value(status.get("hp"))
+        damage_str = format_value(status.get("damage"))
         speed_str = format_value(status.get("speed"))
         armor_str = format_value(status.get("armor"))
         piercing_str = format_value(status.get("piercing"))

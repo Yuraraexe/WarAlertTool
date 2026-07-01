@@ -54,10 +54,8 @@ class Costs(BaseModel):
     cooldown: Optional[int] = Field(description="生産クールタイム。画面に記載がない場合は None。")
 
 class Status(BaseModel):
-    hp: Optional[float] = Field(description="最大HP。ステータス欄の「HP:」の基本値。")
-    hp_growth: Optional[float] = Field(description="最大HPのレベルアップ上昇値。HPの右側にある黄色の「+」以降の数値。")
-    damage: Optional[float] = Field(description="ダメージ。ステータス欄の「ダメージ:」の基本値。")
-    damage_growth: Optional[float] = Field(description="ダメージのレベルアップ上昇値。ダメージの右側にある黄色の「+」以降の数値。")
+    hp: Optional[float] = Field(description="最大HP。ステータス欄の「HP:」の白文字の基本値。黄色の「+」以降の数値は含めないでください。")
+    damage: Optional[float] = Field(description="ダメージ。ステータス欄の「ダメージ:」の白文字の基本値。黄色の「+」以降の数値は含めないでください。")
     armor: Optional[float] = Field(description="装甲。ステータス欄の「装甲:」の値。")
     piercing: Optional[float] = Field(description="穿甲。ステータス欄の「穿甲:」の値。")
     speed: Optional[float] = Field(description="移動速度。ステータス欄の「速度:」の値。")
@@ -118,8 +116,7 @@ def parse_image_to_json(client, image_path, model_name="gemini-2.5-flash"):
     - 石油コスト: 盾アイコンの下の「ドラム缶」アイコンの数値
     - 人的資源コスト: 盾アイコンの下の「パラシュート」アイコンの数値
     - 編成スロット: 盾アイコンの中の数値
-    - HP上昇値: ステータス欄の「HP:」の右側にある黄色の「+」以降の数値
-    - ダメージ上昇値: ステータス欄の「ダメージ:」の右側にある黄色の「+」以降の数値
+    - HPとダメージ: ステータス欄の「HP:」および「ダメージ:」について、白文字の基本値のみを取得し、右側にある黄色の「+」以降の加算数値は無視してください。
     - レア度: ユニットの背景やカードのデザインから「金」なら "gold"、「紫」なら "purple"、「青」なら "blue"、「白」なら "white" を設定してください。
     - 陣営: 背景の国旗や軍章（鉄十字＝ドイツなら "germany"、五芒星＝アメリカなら "usa"、鎌と槌＝ソ連なら "ussr"）から判別して設定してください。
     """

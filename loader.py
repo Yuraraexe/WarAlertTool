@@ -71,9 +71,7 @@ def load_units_from_csv(csv_path):
                     },
                     "status": {
                         "hp": get_float(row.get("最大HP")),
-                        "hp_growth": get_float(row.get("HP上昇値")),
                         "damage": get_float(row.get("ダメージ")),
-                        "damage_growth": get_float(row.get("ダメージ上昇値")),
                         "armor": get_float(row.get("装甲")),
                         "piercing": get_float(row.get("穿甲")),
                         "speed": get_float(row.get("移動速度")),
