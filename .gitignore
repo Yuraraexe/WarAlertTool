@@ -16,6 +16,7 @@ env/
 # 大容量データ・画像
 images/*
 !images/.gitkeep
+!images/vulfrahmen40.png
 
 # 解析・自動生成されたデータおよび出力
 units/*

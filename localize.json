@@ -13,22 +13,5 @@
   "skill_type": {
     "active": "アクティブ",
     "passive": "パッシブ"
-  },
-  "csv_mapping": {
-    "faction": {
-      "ドイツ": "germany",
-      "アメリカ": "usa",
-      "ソ連": "ussr"
-    },
-    "rarity": {
-      "金": "gold",
-      "紫": "purple",
-      "青": "blue",
-      "白": "white"
-    },
-    "skill_type": {
-      "アクティブ": "active",
-      "パッシブ": "passive"
-    }
   }
 }

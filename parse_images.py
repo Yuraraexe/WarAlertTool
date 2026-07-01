@@ -149,6 +149,8 @@ def parse_image_to_json(client, image_path, model_name="gemini-2.5-flash"):
                 return None
 
 def run_image_analysis_pipeline(image_dir, output_dir):
+    import hashlib
+    
     print("\n" + "="*50)
     print("◆ 画像解析（Gemini API）パイプラインの実行")
     print("="*50)
@@ -178,13 +180,50 @@ def run_image_analysis_pipeline(image_dir, output_dir):
         print(f"エラー: '{image_dir}' フォルダ内に画像が見つかりません。")
         return False
         
+    # キャッシュファイルのロード
+    cache_path = os.path.join(output_dir, "processed_cache.json")
+    cache = {}
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                cache = json.load(f)
+        except Exception as e:
+            print(f"Warning: Failed to load cache file ({e}). Starting fresh.")
+
+    def get_file_md5(file_path):
+        hash_md5 = hashlib.md5()
+        with open(file_path, "rb") as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hash_md5.update(chunk)
+        return hash_md5.hexdigest()
+
     print(f"検出された画像数: {len(image_files)}")
     analyzed_files = []
     
     for file in image_files:
         image_path = os.path.join(image_dir, file)
-        print(f"\n[{file}] 解析中...")
         
+        # ハッシュ計算による重複チェック
+        try:
+            md5_val = get_file_md5(image_path)
+        except Exception as e:
+            print(f"Warning: Failed to calculate hash for {file} ({e}). Processing normally.")
+            md5_val = None
+            
+        if md5_val and md5_val in cache:
+            cached_info = cache[md5_val]
+            cached_json_path = cached_info.get("output_json")
+            if cached_json_path and os.path.exists(cached_json_path):
+                try:
+                    with open(cached_json_path, 'r', encoding='utf-8') as f:
+                        cached_data = json.load(f)
+                    print(f"[{file}] すでに解析済みです。キャッシュからロードします。")
+                    analyzed_files.append((cached_json_path, cached_data))
+                    continue
+                except Exception as e:
+                    print(f"Warning: Failed to load cached JSON {cached_json_path} ({e}). Re-analyzing image.")
+
+        print(f"\n[{file}] 解析中...")
         result = parse_image_to_json(client, image_path, model_name)
         if result:
             unit_name = result.get("name", "unknown")
@@ -195,6 +234,19 @@ def run_image_analysis_pipeline(image_dir, output_dir):
                 
             print(f"-> 解析完了。データを保存しました: {output_file}")
             analyzed_files.append((output_file, result))
+            
+            # キャッシュの更新
+            if md5_val:
+                cache[md5_val] = {
+                    "image_file": file,
+                    "output_json": output_file,
+                    "timestamp": time.time()
+                }
+                try:
+                    with open(cache_path, 'w', encoding='utf-8') as f:
+                        json.dump(cache, f, indent=2, ensure_ascii=False)
+                except Exception as e:
+                    print(f"Warning: Failed to save cache ({e})")
         else:
             print(f"-> {file} の解析に失敗しました。")
             
