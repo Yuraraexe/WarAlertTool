@@ -1,0 +1,34 @@
+{
+  "faction": {
+    "germany": "ドイツ",
+    "usa": "アメリカ",
+    "ussr": "ソ連"
+  },
+  "rarity": {
+    "gold": "金",
+    "purple": "紫",
+    "blue": "青",
+    "white": "白"
+  },
+  "skill_type": {
+    "active": "アクティブ",
+    "passive": "パッシブ"
+  },
+  "csv_mapping": {
+    "faction": {
+      "ドイツ": "germany",
+      "アメリカ": "usa",
+      "ソ連": "ussr"
+    },
+    "rarity": {
+      "金": "gold",
+      "紫": "purple",
+      "青": "blue",
+      "白": "white"
+    },
+    "skill_type": {
+      "アクティブ": "active",
+      "パッシブ": "passive"
+    }
+  }
+}

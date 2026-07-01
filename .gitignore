@@ -1,0 +1,31 @@
+# APIキー・認証情報
+.env
+.env.local
+.env.*.local
+
+# Pythonのキャッシュ・仮想環境
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+ENV/
+env/
+
+# 大容量データ・画像
+images/*
+!images/.gitkeep
+
+# 解析・自動生成されたデータおよび出力
+units/*
+!units/.gitkeep
+
+output/*
+!output/.gitkeep
+
+# エディタ・OSの一時ファイル
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

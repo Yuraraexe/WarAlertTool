@@ -1,0 +1,43 @@
+{
+  "name": "ヴルフラーメン40",
+  "rarity": "金",
+  "faction": "ドイツ",
+  "level": 9,
+  "description": "ドイツ軍の自走多連装ロケット砲。",
+  "costs": {
+    "supplies": 10,
+    "oil": 50,
+    "manpower": 390,
+    "slots": 2,
+    "cooldown": 15
+  },
+  "status": {
+    "hp": 236.32,
+    "hp_growth": 11.84,
+    "damage": 182.11,
+    "damage_growth": 9.12,
+    "armor": 11.00,
+    "piercing": 200.00,
+    "speed": 2.70,
+    "range": 54.00,
+    "vision": null,
+    "hit_area": null,
+    "front_armor": null,
+    "side_back_armor": null,
+    "turret_speed": null
+  },
+  "skills": [
+    {
+      "name": "多連装ロケット射撃",
+      "type": "アクティブ",
+      "description": "前方エリアへロケット弾を連続で射撃し、範囲内のすべての敵にダメージを与える。",
+      "cooldown": 25
+    },
+    {
+      "name": "急速装填",
+      "type": "パッシブ",
+      "description": "移動していない時、攻撃速度が15%上昇する。",
+      "cooldown": null
+    }
+  ]
+}

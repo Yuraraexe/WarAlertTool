@@ -1,0 +1,8 @@
+{
+  "output_format": "atwiki",
+  "generation_mode": "single",
+  "localize": "localized",
+  "output_dir": "output",
+  "image_dir": "images",
+  "json_dir": "units"
+}
